@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>SEBARAN SD DI BANDAR LAMPUNG</title>
+        <style>
+            #map {
+                background-color: gray;
+                width: 100%;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        function initMap(){
+            var center = {lat:-4.5586289,lng:105.4069519};
+            var map=new google.maps.Map(document.getElementById('map'),{zoom:8,center:center});
+            // console.log(map);
+			
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+                }); 
+            console.log(locations);
+            console.log(markers);
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'images/m'});
+        
+            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+            console.log(markerCluster.getCalculator());
+            // var marker=new google.maps.Marker({position:center,map:map});
+            // console.log(marker);
+        }
+		
+		
+
+        var locations = [
+        {lat: -5.3618678, lng: 105.2370615},<!-- sd al kautsar -->
+        {lat: -5.4202928, lng: 105.2542507},<!-- sd persit -->
+        {lat: -5.429576, lng: 105.2637785}, <!-- sd imanuel -->
+        {lat: -5.3730222, lng: 105.212747},<!-- sd n 3 kemiling -->
+        {lat: -5.4225218, lng: 105.2550457},<!-- sd islam azzahra -->
+        {lat: -5.42406, lng: 105.24636},<!-- sdk bpk penabur -->
+        {lat: -5.4207658, lng: 105.2471826},<!-- sd pelita bangsa -->
+        {lat: -5.4205465, lng: 105.2459424},<!-- sd n 1 duren payung -->
+        {lat: -5.415614, lng: 105.250485},<!-- sdn 3 kaliawi -->
+        {lat: -5.4084108, lng: 105.2483028},<!-- sd ar-raudah -->
+        {lat: -5.4059572, lng: 105.2416926},<!-- sd n 2 gedong air -->
+        {lat: -5.404406, lng: 105.236361},<!-- sd n 6 gedong air -->
+        {lat: -5.3980104, lng: 105.2503531},<!-- sd n 3 gedong air -->
+        {lat: -5.3972162, lng: 105.2480393},<!-- sd n 1 gedong air -->
+        {lat: -5.4008199, lng: 105.242346},<!-- sd n 4 gedong air -->
+        {lat: -5.3984306, lng: 105.2505522},<!-- sd n 5 gedong air -->
+      
+      ]
+	  
+    </script>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4noGQHoz7ZoG7DYMbxaYbofksVSAXJJI&callback=initMap"></script>
+    <script src="src/markerclusterer.js">
+    </script>
+</html>

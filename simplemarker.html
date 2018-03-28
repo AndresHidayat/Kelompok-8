@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>SEBARAN SD DI BANDAR LAMPUNG</title>
+        <style>
+            #map {
+                background-color: gray;
+                width: 1000px;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        function initMap(){
+            var lampung = {lat:-5.367284,lng:105.244935};
+            var map=new google.maps.Map(document.getElementById('map'),{zoom:12,center:lampung});
+            console.log(map);
+            var infowindow = new google.maps.InfoWindow();
+            var contentString = '<h3>Jurusan Ilmu Komputer</h3><hr>'+
+                                 '<p><a href="http://ilkom.unila.ac.id" target="blank">http://ilkom.unila.ac.id</a>';
+            infowindow.setContent(contentString);
+
+            var marker=new google.maps.Marker({position:lampung,map:map});
+            marker.addListener('click',function(){
+                infowindow.open(map,marker);
+            });
+            console.log(marker);
+            google.maps.event.addListener(map, "click", function (e) {
+                //lat and lng is available in e object
+                var latLng = e.latLng;
+                marker.setPosition(latLng);
+                console.log(marker.getPosition().toString());
+                });
+        }
+    </script>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4noGQHoz7ZoG7DYMbxaYbofksVSAXJJI&callback=initMap"></script>
+
+</html>
