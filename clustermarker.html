@@ -13,58 +13,57 @@
         <div id="map"></div>
     </body>
     <script>
-        function initMap(){
-            var center = {lat:-4.5586289,lng:105.4069519};
-            var map=new google.maps.Map(document.getElementById('map'),{zoom:8,center:center});
-             console.log(map);
+        function initMap() {
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 8, minZoom : 5, maxZoom : 16,
+			center: {
+			lat: -4.5586289,
+			lng: 105.4069519
+			}
+		});
+	
+		var infoWin = new google.maps.InfoWindow();
+ 
+		var markers = locations.map(function(location, i) {
+		var marker = new google.maps.Marker({
+			position: location,
+			label: labels[i % labels.length]
+		});
 			
-            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        
-            var markers = locations.map(function(location, i) {
-                return new google.maps.Marker({
-                    position: location,
-                    label: labels[i % labels.length]
-                });
-                }); 
-            console.log(locations);
-            console.log(markers);
-            var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'images/m'});
-        
-            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
-            console.log(markerCluster.getCalculator());
-             var marker=new google.maps.Marker({position:center,map:map});
-             console.log(marker);
-        }	
+		google.maps.event.addListener(marker, 'click', function(evt) {
+		infoWin.setContent(location.info);
+		infoWin.open(map, marker);
+		})
+		return marker;
+	});
 
-        var locations = [
-        {lat: -5.3618678, lng: 105.2370615},<!-- sd al kautsar -->
-        {lat: -5.4202928, lng: 105.2542507},<!-- sd persit -->
-        {lat: -5.429576, lng: 105.2637785}, <!-- sd imanuel -->
-        {lat: -5.3730222, lng: 105.212747},<!-- sd n 3 kemiling -->
-        {lat: -5.4225218, lng: 105.2550457},<!-- sd islam azzahra -->
-        {lat: -5.42406, lng: 105.24636},<!-- sdk bpk penabur -->
-        {lat: -5.4207658, lng: 105.2471826},<!-- sd pelita bangsa -->
-        {lat: -5.4205465, lng: 105.2459424},<!-- sd n 1 duren payung -->
-        {lat: -5.415614, lng: 105.250485},<!-- sdn 3 kaliawi -->
-        {lat: -5.4084108, lng: 105.2483028},<!-- sd ar-raudah -->
-        {lat: -5.4059572, lng: 105.2416926},<!-- sd n 2 gedong air -->
-        {lat: -5.404406, lng: 105.236361},<!-- sd n 6 gedong air -->
-        {lat: -5.3980104, lng: 105.2503531},<!-- sd n 3 gedong air -->
-        {lat: -5.3972162, lng: 105.2480393},<!-- sd n 1 gedong air -->
-        {lat: -5.4008199, lng: 105.242346},<!-- sd n 4 gedong air -->
-        {lat: -5.3984306, lng: 105.2505522},<!-- sd n 5 gedong air -->
-        {lat: -5.4049489, lng: 105.2581549}, <!-- sd fransiskus 1-->
-        {lat: -5.424456 , lng: 105.268088}, <!-- sd fransiskus 2-->
-        {lat: -5.3782014, lng: 105.2743398}, <!-- sd al-azhar 2 -->
-	{lat: -5.4493592, lng: 105.2667096}, <!-- sd al-azhar 1-->
-	{lat: -5.4037687, lng: 105.2019295}, <!-- sd global madani-->
-	{lat: -5.3840338, lng: 105.2345341}, <!-- SDIT-->
-	{lat: -5.3764232, lng: 105.2433425}, <!-- sd global surya-->
-	{lat: -5.3823835, lng: 105.2443135}, <!-- sdn 3 gunung terang -->
-	{lat: -5.3821592, lng: 105.2339655}, <!-- sdn 1 gunung terang -->
-	{lat: -5.3772884, lng: 105.2526659}, <!-- sd muhammadiyah 1-->
-      ]
+		var markerCluster = new MarkerClusterer(map, markers, {
+		imagePath: 'images/m'
+	});
+		var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+		console.log(markerCluster.getCalculator());
+
+}
+var locations = [
+	{lat: -5.3618678, lng: 105.2370615,info: "SD Al-Kautsar"}, 
+	{lat: -5.4202928, lng: 105.2542507,info: "SD Persit"}, 
+	{lat: -5.429576, lng: 105.2637785,info: "SD Imanuel"}, 
+	{lat: -5.3730222, lng: 105.212747,info : "sd n 3 kemiling "},
+        {lat: -5.4225218, lng: 105.2550457,info : "sd islam azzahra"},
+        {lat: -5.42406, lng: 105.24636, info : "sd bpk penabur"},
+        {lat: -5.4207658, lng: 105.2471826, info : "sd pelita bangsa"},
+        {lat: -5.4205465, lng: 105.2459424, info : "sd n 1 duren payung"},
+        {lat: -5.415614, lng: 105.250485, info : "sdn 3 kaliawi"},
+        {lat: -5.4084108, lng: 105.2483028, info : "sd ar-raudah"},
+        {lat: -5.4059572, lng: 105.2416926, info : "sd n 2 gedong air"},
+        {lat: -5.404406, lng: 105.236361, info : "sd n 6 gedong air"},
+        {lat: -5.3980104, lng: 105.2503531, info : "sd n 3 gedong air"},
+        {lat: -5.3972162, lng: 105.2480393, info : "sd n 1 gedong air"},
+        {lat: -5.4008199, lng: 105.242346, info : "sd n 4 gedong air"},
+	];
+
+google.maps.event.addDomListener(window, "load", initMap);
 	  
 	
     </script>
