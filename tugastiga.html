@@ -1,42 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>GIS</title>
+<meta charset="utf-8">
+<title>SISTEM INFORMASI GEOGRAFIS</title>
 <style>
+body{
+  background-color: #2bb8db;
+}
 #map{
 	width: 100%;
     height: 600px;
     background: whitesmoke;
 	}
-	</style>
+	.myform {
+}
+.submit {
+}
+</style>
 </head>
 
 <body>
-<div class="add-marker">
+<table width="1100" height="830" border="1">
+  <tbody>
+    <tr>
+      <td width="308">&nbsp;</td>
+      <td width="776">&nbsp;
+      <div class="add-marker">
  <div class="map" id="map"></div>
         	
         	 <h3>Input Data Marker</h3>
-             <form>
+             <form id="myform">
              	<p>
-             	<label for="marker.position.toString()">Lat</label>
-                <input type="text" name="lat" id="lat">
+             	<label>Lat</label>
+                <input class="data" type="text" name="lat" id="lat">
              	</p>
                 <p>
                 <label>Lng</label>
-                <input type="text" name="lng" id="lat">
+                <input class="data" type="text" name="lng" id="lng">
                 </p>
                 <p class="full">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea class="data" name="ket" id="ket" cols="30" rows="10"></textarea>
                 </p>
                 <p class="full">
-                	<input class="button" type="submit" value="save">
-                 </p>
+                	<input id="submit" type="button" value="save" onClick="insert()">
+				 </p>
              </form>
             </div>        
-</body>
-    		<script>
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
 
+			<script>
+	
+	
         	function initMap(){
             var bdl = {lat :-5.3971, lng:105.2668};
             var map = new google.maps.Map (document.getElementById('map'),{
@@ -45,27 +63,69 @@
                 maxZoom : 16,
                 center : bdl
         });
-	
-    var marker = new google.maps.Marker({ //membuat marker ada titik pusat
-        position: location.coord,
-        map: map
-    });
-	  
-	
-    map.addListener('click',function(event){
-		 marker.setPosition(event.latLng);
-		document.getElementById("lat").value=marker.position.toString();
+			
+								
+     var map = new google.maps.Map(document.getElementById('map'), {
+          zoom : 12,
+          minZoom : 10,
+          maxZoom : 16,
+          center: bdl
+        });
 
-        console.log(marker.position.toString());
-    });   
+        map.addListener('click', function(e) {
+          placeMarkerAndPanTo(e.latLng, map);
+		
+        });
+				
+			
+      }
 
-    }
+      function placeMarkerAndPanTo(latLng, map) {
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+		 
+		document.getElementById('lat').value=marker.position.lat();
+		document.getElementById('lng').value=marker.position.lng();
+        map.panTo(latLng);
+      }
+		
+		
 
-
+	  var lats = [];
+	  var lngs = [];
+	  var kets = [];
+				
+		var latin = document.getElementById("lat");
+		var lngin = document.getElementById("lng");
+		var ketin = document.getElementById("ket");
+				
+	function insert() {
+		lats.push(latin.value);
+		lngs.push(lngin.value);
+		kets.push(ketin.value);
+		console.log(lats,lngs,kets);
+	}
+			/*	var konten = kets;
+				var infowindow = new google.maps.InfoWindow({
+          content: konten
+        });
+				
+		marker.addListener('click',function() {
+			infowindow.open(map, marker);
+						   }); */
+				
     </script>
 
+</body>
 
-    
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4noGQHoz7ZoG7DYMbxaYbofksVSAXJJI&callback=initMap">
+
+
+
+ <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+ </script>   
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&callback=initMap">
 </script>
+
 </html>
