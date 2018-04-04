@@ -55,23 +55,12 @@
     map.addListener('click',function(event){
 		 marker.setPosition(event.latLng);
 		document.getElementById("lat").value=marker.position.toString();
-		//document.getElementById('lng').value=marker.getPosition(event.latLng,(0,latLng))
-       
-		// marker.position.toString();
+
         console.log(marker.position.toString());
     });   
 
     }
-	/*function loadMarker(){
-		      var markers=locations.map(function(location,i){
-              var marker = new google.maps.marker({
-                   position:location.coord,
-                   label: labels[i%labels.length],
-                   infoWindowIndex:i 
-                        });
-                    })
-				
-				} */
+
 
     </script>
 
