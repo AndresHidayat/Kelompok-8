@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GIS</title>
+<style>
+#map{
+	width: 100%;
+    height: 600px;
+    background: whitesmoke;
+	}
+	</style>
+</head>
+
+<body>
+<div class="add-marker">
+ <div class="map" id="map"></div>
+        	
+        	 <h3>Input Data Marker</h3>
+             <form>
+             	<p>
+             	<label for="marker.position.toString()">Lat</label>
+                <input type="text" name="lat" id="lat">
+             	</p>
+                <p>
+                <label>Lng</label>
+                <input type="text" name="lng" id="lat">
+                </p>
+                <p class="full">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                </p>
+                <p class="full">
+                	<input class="button" type="submit" value="save">
+                 </p>
+             </form>
+            </div>        
+</body>
+    		<script>
+
+        	function initMap(){
+            var bdl = {lat :-5.3971, lng:105.2668};
+            var map = new google.maps.Map (document.getElementById('map'),{
+                zoom : 12,
+                minZoom : 10,
+                maxZoom : 16,
+                center : bdl
+        });
+	
+    var marker = new google.maps.Marker({ //membuat marker ada titik pusat
+        position: location.coord,
+        map: map
+    });
+	  
+	
+    map.addListener('click',function(event){
+		 marker.setPosition(event.latLng);
+		document.getElementById("lat").value=marker.position.toString();
+		//document.getElementById('lng').value=marker.getPosition(event.latLng,(0,latLng))
+       
+		// marker.position.toString();
+        console.log(marker.position.toString());
+    });   
+
+    }
+	/*function loadMarker(){
+		      var markers=locations.map(function(location,i){
+              var marker = new google.maps.marker({
+                   position:location.coord,
+                   label: labels[i%labels.length],
+                   infoWindowIndex:i 
+                        });
+                    })
+				
+				} */
+
+    </script>
+
+
+    
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&callback=initMap">
+</script>
+</html>
