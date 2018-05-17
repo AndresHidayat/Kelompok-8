@@ -1,0 +1,301 @@
+<html>
+    <head>
+        <title>SEBARAN SEKOLAH DASAR DI BANDAR LAMPUNG</title>
+
+      <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+
+
+        <style>
+            body {
+              background-color: #4f697f;
+            }
+
+            #map {
+        width: 100%;
+        height: 500px;
+        background-color: gray;
+      }
+
+
+
+        </style>
+        <!-- <link rel="stylesheet" href="..\GIS\CSS\bootstrap.min.css"> -->
+        <link rel="stylesheet" href="..\20180518\CSS\linearis.css">
+        <link rel="stylesheet" href="..\20180518\CSS\style.css">
+
+    </head>
+    <body>
+
+      <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&libraries=places&callback=initMap"></script>
+
+      <div class="background">
+      <center>
+      <h1>Sistem Informasi Persebaran Sekolah Dasar di Bandarlampung</h1></center>
+
+  <ul>
+    <li><a class="active" href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Filter</a>
+      <div class="dropdown-content">
+        <a href="lihatsemua.html">Lihat Semua</a>
+        <a href="perkecamatan.html">Semua Kecamatan</a>
+      </div></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Lihat Perkecamatan</a>
+        <div class="dropdown-content">
+          <table border="0">
+            <tr>
+              <td><a href="">Tanjung Karang Pusat</a></td>
+              <td><a href="">Tanjung Karang Barat</a></td>
+              <td><a href="">Tanjung Karang Timur</a></td>
+            </tr>
+            <tr>
+              <td><a href="">Kedaton</a></td>
+              <td><a href="">Kemiling</a></td>
+              <td><a href="">Way Halim</a></td>
+            </tr>
+            <tr>
+              <td><a href="">Tanjung Senang</a></td>
+              <td><a href="">Panjang</a></td>
+              <td><a href=""></a></td>
+            </tr>
+            <tr>
+              <td><a href=""></a></td>
+              <td><a href=""></a></td>
+              <td><a href=""></a></td>
+            </tr>
+          </table>
+        </div></li>
+    <li><a href="about.html">About</a></li>
+</ul>
+        <table width="1300" height="830" >
+            <tbody>
+                <tr>
+                    <td width="1050" valign="top">
+                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                            <div id="map"></div>
+        <form id="form">
+          <div class="blaa">
+
+
+                <p><b>KETERANGAN</b></p>
+                <p>
+                    Rating
+                        <input type="radio" name="cats[]" id="cats" value="1">1
+                        <input type="radio" name="cats[]" id="cats" value="2">2
+                        <input type="radio" name="cats[]" id="cats" value="3">3
+                        <input type="radio" name="cats[]" id="cats" value="4">4
+                        <input type="radio" name="cats[]" id="cats" value="5">5
+                    </p>
+                    <p>
+                        Fasilitas
+                            <input type="checkbox" name="cats[]" id="cats" value="lab">Laboratorium
+                            <input type="checkbox" name="cats[]" id="cats" value="kantin">Kantin
+                            <input type="checkbox" name="cats[]" id="cats" value="perpus">Perpustakaan
+                            <input type="checkbox" name="cats[]" id="cats" value="parkir">Lapangan Parkir
+                        </p>
+                        <p>
+                        <label for="notlp">Nomor Telepon Kantor</label>
+                        <input type="text" name="notlp" id="notlp"> <br><br>
+                        <label for="web">Website</label>
+                        <input type="text" name="web" id="web">
+                    </p>
+                </td>
+					<td width="300" valign="top" align="center">
+            <h4>
+              <div class="blaa">
+              <p>DAFTAR NAMA - NAMA SEKOLAH</p></h4>
+            </div>
+            <h4>
+              <div class="blaa">
+              <p>Kategori Sekolah :</p></h4>
+            </div>
+
+
+            <div class="sekolah">
+    <button class="dropsklh">SD Negeri</button>
+    <div class="sekolah-content">
+      <a href="#">SDN 1 Gedung Air</a>
+      <a href="#">SDN 2 Gedung Air</a>
+      <a href="#">SDN 3 Gedung Air</a>
+      <a href="#">SDN 4 Gedung Air</a>
+      <a href="#">SDN 5 Gedung Air</a>
+      <a href="#">SDN 6 Gedung Air</a>
+    </div>
+  </div>
+  <div class="sekolah">
+    <button class="dropsklh">SD Swasta</button>
+    <div class="sekolah-content">
+      <a href="#">SD Ar-Raudah</a>
+      <a href="#">SD Al-Kautsar</a>
+      <a href="#">SD Persit</a>
+      <a href="#">SD Immanuel</a>
+      <a href="#">SD Islam Azzahra</a>
+      <a href="#">SD BPK Penabur</a>
+      <a href="#">SD Pelita Bangsa</a>
+
+    </div>
+  </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+
+                <script>
+ var markers = [
+        ['SD Al-Kautsar',-5.3618678,105.2370615],
+        ['SD Persit',-5.4202928,105.2542507],
+        ['SD Immanuel',-5.429576,105.2637785],
+        ['SDN 5 Gedung Air',-5.3984306, 105.2505522],
+        ['SDN 4 Gedung Air',-5.4008199,105.242346],
+        ['SDN 1 Gedung Air',-5.3972162,105.2480393],
+        ['SDN 3 Gedung Air',-5.3980104,105.2503531],
+        ['SDN 6 Gedung Air', -5.404406, 105.236361],
+        ['SDN 2 Gedung Air',-5.4059572, 105.2416926],
+        ['SD Ar-Raudah',-5.4084108, 105.2483028],
+        ['SD Islam Azzahra', -5.4225218,105.2550457],
+        ['SDK BPK Penabur', -5.42406,105.24636],
+        ['SD Pelita Bangsa',-5.4207658, 105.2471826]
+      ];
+
+                    var map = null;
+                   var center = { lat: -5.375130, lng: 105.253640};
+                   var infowindow;
+
+                     var config = {
+                      apiKey: "AIzaSyArEZtZuovz2vXPuMXGVx4iH0_Ha-GdZos",
+                      authDomain: "geojson8.firebaseapp.com",
+                      databaseURL: "https://geojson8.firebaseio.com",
+                      projectId: "geojson8",
+                      storageBucket: "geojson8.appspot.com",
+                      messagingSenderId: "559886653505"
+                   };
+                   firebase.initializeApp(config);
+
+                   var db = firebase.database();
+                   var dataRef = db.ref('geojson8')
+
+                   dataRef.on('value', showData, showError);
+                   function showData(data){
+                       //console.log(data.val());
+                       map.data.addGeoJson(data.val());
+                       map.data.setStyle({
+                           fillColor :'#4286f4',
+                           strokeWeight: 0.2
+                       });
+                       map.data.addListener('click', function(event){
+                           infoWindowContent = "Kecamatan:"+event.feature.getProperty('KECAMATAN')+"<br>"+"Jumlah Sekolah:";
+                           infowindow.setContent(infoWindowContent);
+                           infowindow.setPosition(event.latLng);
+                           infowindow.open(map);
+
+                       });
+                   }
+                   function showError(err){
+                       console.log(err);
+                   }
+                   function initMap(){
+                       map = new google.maps.Map(document.getElementById('map'),{
+                           zoom: 12,
+                           center: center,
+                           mapTypeId: 'roadmap'
+                       });
+                       infowindow = new google.maps.InfoWindow();
+
+                    // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.marker,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+          /*  var infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+
+        service.getDetails({
+
+        }, function(place, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            var markers = new google.maps.Marker({
+              map: map,
+              icon: icon,
+              position: place.geometry.location
+            });
+            google.maps.event.addListener(markers, 'click', function() {
+              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                place.formatted_address + '</div>');
+              infowindow.open(map, this);
+            });
+          }
+        }); */
+
+            // Create a marker for each place.
+           markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name + ',   ' + place.formatted_address ,
+              position: place.geometry.location
+            }));
+
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+                   }
+
+
+               </script>
+
+                <marquee>Copyright &copy 2018. All rights reserved. Developed by GIS Kelompok 8: Furnando 1617051016 Anastasya Cindy Grissherin 1617051059 Andres Hidayat 1617051081</marquee>
+
+    </body>
+
+
+
+   <!-- <script src="src/markerclusterer.js"></script> -->
+  </div>
+</html>
