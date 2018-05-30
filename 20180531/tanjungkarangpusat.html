@@ -1,0 +1,189 @@
+<html>
+    <head>
+        <title>SEBARAN SEKOLAH DASAR DI BANDAR LAMPUNG</title>
+
+      <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+
+
+        <style>
+            body {
+              background-color: #4f697f;
+            }
+            #map {
+        width: 100%;
+        height: 500px;
+        background-color: gray;
+      }
+        </style>
+    <link rel="stylesheet" href="..\20180531\CSS\linearis.css">
+    <link rel="stylesheet" href="..\20180531\CSS\style.css">
+
+    </head>
+    <body>
+
+      <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&libraries=places&callback=initMap"></script>
+
+      <div class="background">
+      <center>
+      <h1>Sistem Informasi Persebaran Sekolah Dasar di Bandarlampung</h1></center>
+
+  <ul>
+    <li><a class="active" href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Filter</a>
+      <div class="dropdown-content">
+        <a href="lihatsemua.html">Lihat Semua</a>
+        <a href="kecamatannya.html">Semua Kecamatan</a>
+      </div></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Lihat Perkecamatan</a>
+        <div class="dropdown-content">
+          <table border="0">
+            <tr>
+              <td><a href="tanjungkarangpusat.html">Tanjung Karang Pusat</a></td>
+              <td><a href="tanjungkarangbarat.html">Tanjung Karang Barat</a></td>
+              <td><a href="">Tanjung Karang Timur</a></td>
+            </tr>
+            <tr>
+              <td><a href="">Kedaton</a></td>
+              <td><a href="">Kemiling</a></td>
+              <td><a href="">Way Halim</a></td>
+            </tr>
+            <tr>
+              <td><a href="">Tanjung Senang</a></td>
+              <td><a href="">Panjang</a></td>
+              <td><a href=""></a></td>
+            </tr>
+            <tr>
+              <td><a href=""></a></td>
+              <td><a href=""></a></td>
+              <td><a href=""></a></td>
+            </tr>
+          </table>
+        </div></li>
+    <li><a href="about.html">About</a></li>
+</ul>
+        <table width="1300" height="830" >
+            <tbody>
+                <tr>
+                    <td width="1050" valign="top">
+                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                            <div id="map"></div>
+                </td>
+					<td width="300" valign="top" align="center">
+            <h4>
+              <div class="blaa">
+              <p>DAFTAR NAMA - NAMA SEKOLAH</p></h4>
+            </div>
+            <h4>
+              <div class="blaa">
+              <p>Kategori Sekolah :</p></h4>
+            </div>
+
+
+            <div class="sekolah">
+    <button class="dropsklh">SD Negeri</button>
+    <div class="sekolah-content">
+      <a href="sdn1gedongair.html">SDN 1 Gedung Air</a>
+      <a href="sdn2gedongair.html">SDN 2 Gedung Air</a>
+      <a href="sdn3gedongair.html">SDN 3 Gedung Air</a>
+      <a href="#">SDN 4 Gedung Air</a>
+      <a href="#">SDN 5 Gedung Air</a>
+      <a href="#">SDN 6 Gedung Air</a>
+    </div>
+  </div>
+  <div class="sekolah">
+    <button class="dropsklh">SD Swasta</button>
+    <div class="sekolah-content">
+      <a href="alraudah.html">SD Ar-Raudah</a>
+      <a href="alkautsar.html">SD Al-Kautsar</a>
+      <a href="#">SD Persit</a>
+      <a href="#">SD Immanuel</a>
+      <a href="#">SD Islam Azzahra</a>
+      <a href="#">SD BPK Penabur</a>
+      <a href="#">SD Pelita Bangsa</a>
+
+    </div>
+  </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+
+        <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&callback=initMap"></script>
+        <div id="map"> </div>
+
+        <script>
+            var map = null;
+            var center = { lat: -5.417020, lng: 105.264536};
+            var infowindow;
+            var config = {
+                          apiKey: "AIzaSyDt-fgRai5dy3CsWLV5bF8r2Yq_mlEu4-4",
+                          authDomain: "gjson-0307.firebaseapp.com",
+                          databaseURL: "https://gjson-0307.firebaseio.com",
+                          projectId: "gjson-0307",
+                          storageBucket: "gjson-0307.appspot.com",
+                          messagingSenderId: "443485088423"
+                        };
+            firebase.initializeApp(config);
+            var db = firebase.database();
+            var dataRef = db.ref('tanjungkarangpusat');
+            dataRef.on('value', showData, showError);
+            function showData(data){
+                map.data.addGeoJson(data.val());
+                map.data.setStyle({
+                    fillColor: 'red',
+                    strokeWeight: 0.2
+                });
+                map.data.addListener('dblclick', function(event){
+                    infowindowcontent = event.feature.getProperty('DESA')+"<br>"+event.feature.getProperty('KECAMATAN');
+                    infowindow.setContent(infowindowcontent);
+                    infowindow.setPosition(event.latLng);
+                    infowindow.open(map);
+                });
+            };
+            function showError(err){
+            };
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: center
+                });
+                var infoWin = new google.maps.InfoWindow();
+            console.log(map);
+            var markers = locations.map(function(location, i) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    //icon : '../images/pin.png',
+                    //animation: google.maps.Animation.DROP
+                    });
+                google.maps.event.addListener(marker, 'click', function(evt) {
+                    infoWin.setContent(location.info);
+                    infoWin.open(map, marker);
+                    })
+            map.addListener('click',function(evt){
+                marker.setPosition(event.latLng);
+                document.getElementById('lat').value = marker.position.toString();
+                });
+                return marker;
+                });
+                console.log(locations);
+                console.log(markers);
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'images/m'});
+            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+            console.log(markerCluster.getCalculator());
+            }
+            var locations = [
+                {lat: -5.4202928, lng:  105.2542507, info:'<div class="info"><h2>SD Persit</h2><hr><p>Palapa, Tj. Karang Bar., Kota Bandar Lampung, Lampung 35116</p></div>'},
+                {lat: -5.4225218, lng: 105.2550457,info:'<div class="info"><h2>SD Islam Azzahra</h2><hr><p>Jl. Mayjend. D.I. Panjaitan No.3, Gotong Royong, Tj. Karang Pusat, Kota Bandar Lampung, Lampung 35214</p></div>'},
+                {lat: -5.42406, lng: 105.24636,info:'<div class="info"><h2>SDK BPK Penabur</h2><hr><p>Jl. DI. Panjaitan No. 18, Tanjung Karang, Gotong Royong, Tj. Karang Pusat, Kota Bandar Lampung, Lampung 35214</p></div>'},
+                {lat: -5.4207658, lng: 105.2471826,info:'<div class="info"><h2>SD Pelita Bangsa</h2><hr><p>Jl. P. Emir Moh. Noer No.33, Durian Payung, Tj. Karang Pusat, Kota Bandar Lampung, Lampung 35214</p></div>'},
+                    ]
+        </script>
+        <script src="src/markerclusterer.js"> </script>
+</html>

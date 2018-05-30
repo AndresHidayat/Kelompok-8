@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>SEBARAN SEKOLAH DASAR DI BANDAR LAMPUNG</title>
+
+      <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+
+
+        <style>
+            #map-canvas {
+        width: 100%;
+        height: 500px;
+      }
+        </style>
+                <link rel="stylesheet" href="..\20180531\CSS\linearis.css">
+                <link rel="stylesheet" href="..\20180531\CSS\style.css">
+    </head>
+    <body>
+      <center>
+      <h1>Sistem Informasi Persebaran Sekolah Dasar di Bandarlampung</h1></center>
+
+  <ul>
+    <li><a class="active" href="home.html">Home</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Filter</a>
+      <div class="dropdown-content">
+        <a href="lihatsemua.html">Lihat Semua</a>
+        <a href="kecamatannya.html">Per Kecamatan</a>
+      </div></li>
+      <li><a class="active" href="direction.html">Petunjuk Arah</a></li>
+    <li><a href="about.html">About</a></li>
+</ul>
+        <table width="1300" height="830" >
+            <tbody>
+                <tr>
+                    <td width="1050" valign="top">
+                            <div id="map-canvas"></div>
+        
+                </td>
+					<td width="300" valign="top" align="center">
+            <h4>
+              <div class="blaa">
+                <p>Kategori Sekolah :</p></h4>
+              </div>
+  
+  
+              <div class="sekolah">
+      <button class="dropsklh">SD Negeri</button>
+      <div class="sekolah-content">
+        <a href="sdn1gedongair.html">SDN 1 Gedung Air</a>
+        <a href="sdn2gedongair.html">SDN 2 Gedung Air</a>
+        <a href="sdn3gedongair.html">SDN 3 Gedung Air</a>
+        <a href="#">SDN 4 Gedung Air</a>
+        <a href="#">SDN 5 Gedung Air</a>
+        <a href="#">SDN 6 Gedung Air</a>
+      </div>
+    </div>
+    <div class="sekolah">
+      <button class="dropsklh">SD Swasta</button>
+      <div class="sekolah-content">
+        <a href="alraudah.html">SD Ar-Raudah</a>
+        <a href="alkautsar.html">SD Al-Kautsar</a>
+        <a href="#">SD Persit</a>
+        <a href="#">SD Immanuel</a>
+        <a href="#">SD Islam Azzahra</a>
+        <a href="#">SD BPK Penabur</a>
+        <a href="#">SD Pelita Bangsa</a>
+  
+      </div>
+    </div>
+                  </td>
+                  </tr>
+                  </tbody>
+                  </table>
+                  </div>
+                <marquee>Copyright &copy 2018. All rights reserved. Developed by GIS Kelompok 8: Furnando 1617051016 Anastasya Cindy Grissherin 1617051059 Andres Hidayat 1617051081</marquee>
+
+    </body>
+    <script>
+ var markers = [
+        ['<a href="alkautsar.html">SD Al-Kautsar</a>',-5.3618678,105.2370615],
+        ['<a href="#">SD Persit</a>',-5.4202928,105.2542507],
+        ['<a href="#">SD Immanuel</a>',-5.429576,105.2637785],
+        ['<a href="#">SDN 5 Gedung Air</a>',-5.3984306, 105.2505522],
+        ['<a href="#">SDN 4 Gedung Air</a>',-5.4008199,105.242346],
+        ['<a href="sdn1gedongair.html">SDN 1 Gedung Air</a>',-5.3972162,105.2480393],
+        ['<a href="sdn3gedongair.html">SDN 3 Gedung Air</a>',-5.3980104,105.2503531],
+        ['<a href="#">SDN 6 Gedung Air</a>', -5.404406, 105.236361],
+        ['<a href="#"><a href="sdn2gedongair.html">SDN 2 Gedung Air</a>',-5.4059572, 105.2416926],
+        ['<a href="#">SD Ar-Raudah</a>',-5.4084108, 105.2483028],
+        ['<a href="#">SD Islam Azzahra</a>', -5.4225218,105.2550457],
+        ['<a href="#">SDK BPK Penabur</a>', -5.42406,105.24636],
+        ['<a href="#">SD Pelita Bangsa</a>',-5.4207658, 105.2471826]
+      ];
+
+        function initialize() {
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }     
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+ 
+    var infowindow = new google.maps.InfoWindow(), marker, i;
+    var bounds = new google.maps.LatLngBounds(); // diluar looping
+    for (i = 0; i < markers.length; i++) {  
+    pos = new google.maps.LatLng(markers[i][1], markers[i][2]);
+    bounds.extend(pos); // di dalam looping
+    marker = new google.maps.Marker({
+        position: pos,
+        map: map
+    });
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            infowindow.setContent(markers[i][0]);
+            infowindow.open(map, marker);
+        }
+    })(marker, i));
+    map.fitBounds(bounds); // setelah looping
+    }
+ 
+      }
+ 
+ 
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&callback=initialize"></script>
+   <!-- <script src="src/markerclusterer.js"></script> -->
+</html>

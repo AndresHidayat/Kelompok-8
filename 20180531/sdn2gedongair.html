@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>DATA SDN 2 GEDONG AIR</title>
+
+      <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+
+        <style>
+          body {
+              background-color: #4f697f;
+            }
+
+        </style>
+
+       <!-- <link rel="stylesheet" href="..\20180525\CSS\bootstrap.min.css"> -->
+        <link rel="stylesheet" href="..\20180531\CSS\linearis.css">
+        <link rel="stylesheet" href="..\20180531\CSS\style.css">
+    </head>
+
+      <body>
+      <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&libraries=places&callback=initMap"></script>
+
+      <div class="background">
+      <center>
+      <h1>Sistem Informasi Persebaran Sekolah Dasar di Bandarlampung</h1></center>
+
+  <ul>
+    <li><a class="active" href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Filter</a>
+      <div class="dropdown-content">
+        <a href="lihatsemua.html">Lihat Semua</a>
+        <a href="kecamatannya.html">Per-kecamatan</a>
+      </div></li>
+      <li><a class="active" href="direction.html">Petunjuk Jarak</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+        <table width="1300" height="830" >
+            <tbody>
+                <tr>
+                    <td width="1050" valign="top">
+
+      <div class="jarak">
+          <center>
+            <h3>SDN 2 GEDONG AIR</h3>
+            <img src="../20180518/images/2 gedong air.jpg" height="550" width="900"> </center>
+      </div>
+
+        <form id="form">
+          <div class="blaa">
+            <div class="jarak2">
+                <p><b>KETERANGAN</b></p>
+                  <table class="blaa">
+                    <tr>
+                      <td>Rating</td>
+                      <td>
+                        <input type="radio" name="cats[]" id="cats" value="1">1
+                        <input type="radio" name="cats[]" id="cats" value="2">2
+                        <input type="radio" name="cats[]" id="cats" value="3" checked="checked">3
+                        <input type="radio" name="cats[]" id="cats" value="4">4
+                        <input type="radio" name="cats[]" id="cats" value="5">5</td>
+                    </tr>
+                    <tr>
+                      <td>Fasilitas</td>
+                      <td>
+                        <input type="checkbox" name="cats[]" id="cats" value="lab" >Laboratorium
+                        <input type="checkbox" name="cats[]" id="cats" value="kantin" checked="checked">Kantin
+                        <input type="checkbox" name="cats[]" id="cats" value="perpus" checked="checked">Perpustakaan
+                        <input type="checkbox" name="cats[]" id="cats" value="parkir" >Lapangan Parkir</td>
+                    </tr>
+                    <tr>
+                      <td><label for="notlp">Nomor Telepon Kantor</label></td>
+                      <td>
+                        <input type="text" name="notlp" id="notlp" value="0721-257859"></td>
+                    </tr>
+                    <tr>
+                      <td><label for="web">Website</label></td>
+                      <td><input type="text" name="web" id="web" value="-"></td>
+                    </tr>
+                  </table>
+          </div>
+
+					<td width="300" valign="top" align="center">
+            <h4>
+              <div class="jarak">
+              <div class="blaa">
+                <p>DAFTAR NAMA - NAMA SEKOLAH</p></h4>
+              </div>
+            <h4>
+              <div class="blaa">
+                <p>Kategori Sekolah :</p></h4>
+            </div>
+
+    <div class="sekolah">
+    <button class="dropsklh">SD Negeri</button>
+      <div class="sekolah-content">
+          <a href="sdn1gedongair.html">SDN 1 Gedung Air</a>
+          <a href="sdn2gedongair.html">SDN 2 Gedung Air</a>
+          <a href="sdn3gedongair.html">SDN 3 Gedung Air</a>
+          <a href="#">SDN 4 Gedung Air</a>
+          <a href="#">SDN 5 Gedung Air</a>
+          <a href="#">SDN 6 Gedung Air</a>
+      </div>
+    </div>
+
+    <div class="sekolah">
+    <button class="dropsklh">SD Swasta</button>
+      <div class="sekolah-content">
+          <a href="arraudah.html">SD Ar-Raudah</a>
+          <a href="alkautsar.html">SD Al-Kautsar</a>
+          <a href="#">SD Persit</a>
+          <a href="#">SD Immanuel</a>
+          <a href="#">SD Islam Azzahra</a>
+          <a href="#">SD BPK Penabur</a>
+          <a href="#">SD Pelita Bangsa</a>
+      </div>
+    </div>
+  </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+
+        <marquee>Copyright &copy 2018. All rights reserved. Developed by GIS Kelompok 8: Furnando 1617051016 Anastasya Cindy Grissherin 1617051059 Andres Hidayat 1617051081</marquee>
+    </body>
+  </div>
+</html>
