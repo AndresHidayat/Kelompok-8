@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SEBARAN SEKOLAH DASAR DI BANDAR LAMPUNG</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+    <link rel="stylesheet" href="..\gis\CSS\linearis.css">
+    <link rel="stylesheet" href="..\gis\CSS\style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #map {
+        background-color: gray;
+        height: 500px;
+        width: 100%;
+      }
+      #legenda {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+      }
+      #legenda h4 {
+        margin-top: 0;
+      }
+      #legenda img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+        <center>
+                <h1>Sistem Informasi Persebaran Sekolah Dasar di Bandarlampung</h1></center>
+          
+            <ul>
+              <li><a class="active" href="home.html">Home</a></li>
+              <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Filter</a>
+                <div class="dropdown-content">
+                  <a href="lihatsemua.html">Lihat Semua</a>
+                  <a href="kecamatannya.html">Per Kecamatan</a>
+                </div></li>
+                <li><a class="active" href="direction.html">Petunjuk Arah</a></li>
+              <li><a href="about.html">About</a></li>
+          </ul>
+                  <table width="1300" height="830" >
+                      <tbody>
+                          <tr>
+                              <td width="1050" valign="top"> 
+                                  <center><h4>PERSEBARAN SD</h4></center>
+    <div id="map"></div>
+    <div id="legenda"><h4>Legenda</h4></div>
+</td>
+<td width="300" valign="top" align="center">
+<h4>
+<div class="blaa">
+<p>Kategori Sekolah :</p></h4>
+</div>
+
+
+<div class="sekolah">
+<button class="dropsklh">SD Negeri</button>
+<div class="sekolah-content">
+<a href="sdn1gedongair.html">SDN 1 Gedung Air</a>
+<a href="sdn2gedongair.html">SDN 2 Gedung Air</a>
+<a href="sdn3gedongair.html">SDN 3 Gedung Air</a>
+<a href="#">SDN 4 Gedung Air</a>
+<a href="#">SDN 5 Gedung Air</a>
+<a href="#">SDN 6 Gedung Air</a>
+</div>
+</div>
+<div class="sekolah">
+<button class="dropsklh">SD Swasta</button>
+<div class="sekolah-content">
+<a href="alraudah.html">SD Ar-Raudah</a>
+<a href="alkautsar.html">SD Al-Kautsar</a>
+<a href="alazhar2.html">SD Al Azhar 2</a>
+<a href="#">SD Immanuel</a>
+<a href="#">SD Islam Azzahra</a>
+<a href="#">SD BPK Penabur</a>
+<a href="#">SD Pelita Bangsa</a>
+
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<marquee>Copyright &copy 2018. All rights reserved. Developed by GIS Kelompok 8: Furnando 1617051016 Anastasya Cindy Grissherin 1617051059 Andres Hidayat 1617051081</marquee>
+
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: new google.maps.LatLng(-5.417020, 105.264536),
+          mapTypeId: 'roadmap'
+        });
+        var infoWin = new google.maps.InfoWindow();
+
+        //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+          negeri: {
+            name: 'Negeri',
+            icon:'images/pin.png'
+          },
+          swasta: {
+            name: 'Swasta',
+            icon: 'images/pin2.png'
+          }
+        };
+
+        var features = [
+{
+            position: new google.maps.LatLng(-5.3984306, 105.2505522),
+            type: 'negeri',
+            info: '<a href="">SDN 5 Gedung Air</a>'
+          }, {
+            position: new google.maps.LatLng(-5.4008199, 105.242346),
+            type: 'negeri',
+            info: '<a href="">SDN 4 Gedung Air</a>'
+          }, {
+            position: new google.maps.LatLng(-5.3972162,105.2480393),
+            type: 'negeri',
+            info: '<a href="">SDN 1 Gedung Air</a>'
+          }, {
+            position: new google.maps.LatLng(-5.3980104, 105.2503531),
+            type: 'negeri',
+            info: '<a href="">SDN 3 Gedung Air</a>'
+          }, {
+            position: new google.maps.LatLng(-5.404406, 105.236361),
+            type: 'negeri',
+            info: '<a href="">SDN 6 Gedung Air</a>'
+          },{
+            position: new google.maps.LatLng(-5.4059572,105.2416926),
+            type: 'negeri',
+            info: '<a href="">SDN 2 Gedung Air</a>'
+          },{
+            position: new google.maps.LatLng(-5.3618678,105.2370615),
+            type: 'swasta',
+            info: '<a href="">SD Al-Kautsar</a>'
+          }, {
+            position: new google.maps.LatLng(-5.4202928, 105.2542507),
+            type: 'swasta',
+            info: '<a href="">SD Persit</a>'
+          }, {
+            position: new google.maps.LatLng(-5.429576, 105.2637785),
+            type: 'swasta',
+            info: '<a href="">SD Immanuel</a>'
+          }, {
+            position: new google.maps.LatLng(-5.4084108, 105.2483028),
+            type: 'swasta',
+            info: '<a href="">SD Al-Raudah</a>'
+          }, {
+            position: new google.maps.LatLng(-5.4225218, 105.2550457),
+            type: 'swasta',
+            info: '<a href="">SD Islam Azzahra</a>'
+          }, {
+            position: new google.maps.LatLng(-5.42406, 105.24636),
+            type: 'swasta',
+            info: '<a href="">SD Kristen BPK Penabur</a>'
+          }, {
+            position: new google.maps.LatLng(-5.4207658, 105.2471826),
+            type: 'swasta',
+            info: '<a href="">SD Pelita Bangsa</a>'
+          }
+        ];
+
+        // Create markers.
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+          google.maps.event.addListener(marker, 'click', function(evt) {
+							infoWin.setContent(feature.info);
+							infoWin.open(map, marker);
+							})
+        });
+
+        var legenda = document.getElementById('legenda');
+        for (var key in icons) {
+          var type = icons[key];
+          var name = type.name;
+          var icon = type.icon;
+          var div = document.createElement('div');
+          div.innerHTML = '<img src="' + icon + '"> ' + name;
+          legenda.appendChild(div);
+        }
+
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legenda);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZNGc0Hwx93NcAqlZuYIFGXbEj9EnCtBA&callback=initMap">
+    </script>
+  </body>
+</html>
